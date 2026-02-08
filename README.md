@@ -25,6 +25,7 @@ This project transforms stream interactions into an engaging visual experience. 
 ## ✨ Features
 
 ### Frontend (Vue 3)
+- **Cinematic Landing Page** - Video background with neon cyberpunk aesthetic
 - **Real-time Canvas Animations** - 60fps with projectiles and damage numbers
 - **Global Rankings** - Leaderboard with Global/Friends toggle
 - **Achievements System** - Unlockable badges
@@ -152,6 +153,8 @@ The overlay page has a transparent background, so only the hero, monster and eff
 ## 🔮 Roadmap
 
 ### ✅ Completed
+- [x] Landing Page Redesign (Cyberpunk/Neon style)
+- [x] Video Background with Toggle (Cinematic loop)
 - [x] Canvas battle system
 - [x] Dashboard with Config/Test tabs
 - [x] Global Rankings & Achievements
