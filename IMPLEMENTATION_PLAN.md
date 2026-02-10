@@ -142,8 +142,19 @@ Todos os componentes estão funcionando:
 - [ ] Update monster HP values in `gameconfig.json`
 - [ ] Add death/spawn animations
 - [ ] Particle effects for critical hits
-- [ ] Sound effects integration
 - [ ] Multiple monster sprites per wave
+
+### ✅ Phase 13: Landing Page Polish & Demo Mode (2026-02-10)
+- [x] Custom logo image (`/imgs/logo.png`) replacing text title
+- [x] Custom card images (`/imgs/follow.png`, `/imgs/sub.png`, `/imgs/bits.png`)
+- [x] Layout: logo at top, button + cards + footer at bottom (`justify-between`)
+- [x] Background music player with play/pause and marquee song name
+- [x] Footer with developer link and GitHub link (same as dashboard)
+- [x] **Demo Mode** (`/dashboard?demo=true`): preview dashboard without Twitch account
+  - Skips all API calls, SignalR, and stream polling
+  - Goes directly to Test tab with Dummy monster
+  - Config tab, Shop, Reset, and Export OBS buttons disabled
+- [x] Proper logout function (clears `access_token`, `user_id`, `twitch_id`)
 
 ## Phase 6 Details: SignalR Frontend Integration
 

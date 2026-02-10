@@ -11,18 +11,30 @@
                     <div class="text-sm text-gray-400">DPS: {{ dps }}</div>
                 </div>
                 <!-- Shop Button -->
-                <button @click="$emit('openShop')"
-                    class="px-4 py-2 bg-yellow-600 hover:bg-yellow-500 text-white rounded-lg text-sm font-medium transition-colors">
+                <button @click="!demoMode && $emit('openShop')" :disabled="demoMode" :class="[
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    demoMode
+                        ? 'bg-yellow-600/40 text-white/40 cursor-not-allowed'
+                        : 'bg-yellow-600 hover:bg-yellow-500 text-white'
+                ]">
                     🛒 Shop
                 </button>
                 <!-- Export for OBS -->
-                <button @click="$emit('exportOBS')"
-                    class="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-sm font-medium transition-colors">
+                <button @click="!demoMode && $emit('exportOBS')" :disabled="demoMode" :class="[
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    demoMode
+                        ? 'bg-blue-600/40 text-white/40 cursor-not-allowed'
+                        : 'bg-blue-600 hover:bg-blue-500 text-white'
+                ]">
                     📤 Export OBS
                 </button>
                 <!-- Reset Button -->
-                <button @click="$emit('reset')"
-                    class="px-4 py-2 bg-red-600 hover:bg-red-500 text-white rounded-lg text-sm font-medium transition-colors">
+                <button @click="!demoMode && $emit('reset')" :disabled="demoMode" :class="[
+                    'px-4 py-2 rounded-lg text-sm font-medium transition-colors',
+                    demoMode
+                        ? 'bg-red-600/40 text-white/40 cursor-not-allowed'
+                        : 'bg-red-600 hover:bg-red-500 text-white'
+                ]">
                     🔄 Reset
                 </button>
                 <!-- Logout -->
@@ -38,7 +50,8 @@
 <script setup>
 defineProps({
     wave: { type: Number, default: 1 },
-    dps: { type: [Number, String], default: 0 }
+    dps: { type: [Number, String], default: 0 },
+    demoMode: { type: Boolean, default: false }
 })
 
 defineEmits(['openShop', 'logout', 'exportOBS', 'reset'])

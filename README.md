@@ -26,6 +26,9 @@ This project transforms stream interactions into an engaging visual experience. 
 
 ### Frontend (Vue 3)
 - **Cinematic Landing Page** - Video background with neon cyberpunk aesthetic
+- **Custom Logo & Card Images** - PNG-based branding (`/imgs/logo.png`, `/imgs/follow.png`, etc.)
+- **Background Music Player** - Play/pause with scrolling marquee song name
+- **Demo Mode** - Try the dashboard without a Twitch account
 - **Real-time Canvas Animations** - 60fps with projectiles and damage numbers
 - **Global Rankings** - Leaderboard with Global/Friends toggle
 - **Achievements System** - Unlockable badges
@@ -74,6 +77,8 @@ DPSVisualizer/
 │   ├── Models/                   # Database entities
 │   └── Data/                     # EF Core context
 ├── public/sprites/               # Game assets
+├── public/imgs/                  # UI images (logo, cards)
+├── public/song/                  # Background music
 └── IMPLEMENTATION_PLAN.md        # Backend roadmap
 ```
 
@@ -99,8 +104,8 @@ DPSVisualizer/
   │   1. LOGIN          2. DASHBOARD           3. LIVE              4. OBS   │
   │                                                                          │
   │   ┌─────────┐       ┌─────────────────┐    ┌────────────┐    ┌────────┐  │
-  │   │ Login   │       │ 🔴 OFFLINE      │    │ 🟢 LIVE    │    │ Copy   │  │
-  │   │  with   │──────▶│                 │───▶│            │───▶│  URL   │  │
+  │   │ Login   │       │ 🔴 OFFLINE      │    │ 🟢 LIVE    │    │ Copy  │ │
+  │   │  with   │──────▶│                 │───▶│            │───▶│  URL │  │
   │   │ Twitch  │       │ [Test Follow]   │    │ Real       │    │  for   │  │
   │   └─────────┘       │ [Test Sub]      │    │ Twitch     │    │  OBS   │  │
   │                     │ [Test Bits]     │    │ Events     │    └────────┘  │
@@ -124,8 +129,9 @@ DPSVisualizer/
 
 | Route | Description |
 |-------|-----------|
-| `/` | Landing page with "Login with Twitch" button |
+| `/` | Landing page with "Login with Twitch" button + DEMO link |
 | `/dashboard` | Control panel (after login) |
+| `/dashboard?demo=true` | Demo mode (no API, test tab only) |
 | `/overlay?id=xxx` | Pure visualization for OBS (transparent, no UI) |
 
 ### How Does it Detect if Stream is LIVE?
@@ -173,6 +179,11 @@ The overlay page has a transparent background, so only the hero, monster and eff
 - [x] Auto-detect LIVE stream status via Twitch API
 - [x] Reset Progress button in dashboard
 - [x] HP base configurable (not hardcoded)
+- [x] Custom logo & card images on landing page
+- [x] Background music player with play/pause + marquee
+- [x] Demo mode (dashboard preview without Twitch account)
+- [x] Proper logout (clears all auth data + redirects)
+- [x] Disabled Config/Shop/Reset/Export OBS in demo mode
 
 ### 🏗️ Architecture (v1.0)
 

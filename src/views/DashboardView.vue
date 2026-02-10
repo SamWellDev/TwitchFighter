@@ -1,8 +1,8 @@
 <template>
     <div class="min-h-screen bg-gray-900 flex flex-col">
         <!-- Header -->
-        <AppHeader :wave="currentWave" :dps="calculatedDPS" @openShop="openShop" @logout="logout" @exportOBS="exportOBS"
-            @reset="showResetModal = true" />
+        <AppHeader :wave="currentWave" :dps="calculatedDPS" :demoMode="demoMode" @openShop="openShop" @logout="logout"
+            @exportOBS="exportOBS" @reset="showResetModal = true" />
 
         <!-- Main Content -->
         <main class="container mx-auto px-6 py-6 flex-1">
@@ -73,12 +73,14 @@
 
                     <!-- Tab Headers -->
                     <div class="flex mb-4 bg-gray-900 rounded-lg p-1">
-                        <button @click="activeTab = 'config'" :class="[
+                        <button @click="!demoMode && (activeTab = 'config')" :class="[
                             'flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors',
-                            activeTab === 'config'
-                                ? 'bg-purple-600 text-white'
-                                : 'text-gray-400 hover:text-white'
-                        ]">
+                            demoMode
+                                ? 'text-gray-600 cursor-not-allowed opacity-50'
+                                : activeTab === 'config'
+                                    ? 'bg-purple-600 text-white'
+                                    : 'text-gray-400 hover:text-white'
+                        ]" :disabled="demoMode">
                             ⚙️ Config
                         </button>
                         <button @click="switchToTest" :class="[
@@ -315,10 +317,20 @@ const showHUD = ref(true) // Show stats, wave info, DPS panels
 const showResetModal = ref(false)
 const isLive = ref(false) // Will be auto-detected from Twitch
 const streamStatusInterval = ref(null)
+const demoMode = ref(false)
 
 // Handle auth callback params on mount
 onMounted(async () => {
     const urlParams = new URLSearchParams(window.location.search)
+
+    // Check for demo mode
+    if (urlParams.get('demo') === 'true') {
+        demoMode.value = true
+        activeTab.value = 'test'
+        console.log('Demo mode activated - no API connections')
+        return
+    }
+
     const token = urlParams.get('token')
     const id = urlParams.get('userId')
     const twitch = urlParams.get('twitchId')
@@ -688,8 +700,20 @@ const confirmReset = async () => {
 }
 
 const logout = () => {
-    localStorage.removeItem('twitch_token')
-    localStorage.removeItem('twitch_user')
+    // Clear all auth data
+    localStorage.removeItem('access_token')
+    localStorage.removeItem('user_id')
+    localStorage.removeItem('twitch_id')
+
+    // Stop polling intervals
+    if (streamStatusInterval.value) {
+        clearInterval(streamStatusInterval.value)
+    }
+
+    // Disconnect SignalR
+    disconnectSignalR()
+
+    // Redirect to landing page
     router.push('/')
 }
 
