@@ -245,6 +245,7 @@ watch(() => props.initialWave, (newWave, oldWave) => {
     monster.dying = false;
     monster.deathScale = 1;
     monster.deathOpacity = 1;
+    loadMonsterSprite();
   }
 }, { immediate: true });
 
@@ -256,16 +257,28 @@ const loadHeroSprite = () => {
   };
   // Use prop if provided, fallback to default
   const skin = props.heroSkin || 'hero_1';
-  hero.image.src = skin === 'hero_1' ? '/sprites/hero_1.png' : `/sprites/${skin}.png`;
+  hero.image.src = skin === 'hero_1' ? '/sprites/Heroes/hero_1.png' : `/sprites/Heroes/${skin}.png`;
 };
 
 // Carregar sprite do monstro
 const loadMonsterSprite = () => {
+  monster.loaded = false;
   monster.image = new Image();
   monster.image.onload = () => {
     monster.loaded = true;
   };
-  monster.image.src = '/sprites/slime_1.png';
+
+  const name = monster.name.toLowerCase();
+  let spriteName = 'slime_1';
+
+  if (name.includes('assault')) spriteName = 'Goblin_Assault';
+  else if (name.includes('brute') || name.includes('titan')) spriteName = 'Goblin_Brute';
+  else if (name.includes('ranger') || name.includes('sniper')) spriteName = 'Goblin_Ranger';
+  else if (name.includes('slime')) spriteName = 'slime_1';
+  else if (name === 'dummy') spriteName = 'dummy';
+  else spriteName = 'Goblin_Brute';
+
+  monster.image.src = `/sprites/Monsters/${spriteName}.png`;
 };
 
 // Configuração inicial do canvas
@@ -456,11 +469,12 @@ const spawnNextMonster = () => {
   monster.spawning = false;
   monster.deathScale = 1;
   monster.deathOpacity = 1;
+  loadMonsterSprite();
 };
 
 // Nome do monstro baseado na wave
 const getMonsterName = (wave) => {
-  const names = ["Slime", "Goblin", "Orc", "Troll", "Demon", "Dragon", "Titan", "Ancient One"];
+  const names = ["Green Slime", "Goblin Assault", "Goblin Brute", "Goblin Ranger", "King Slime", "Elite Assault", "Titan Brute", "Sniper Ranger"];
   return names[Math.min(wave - 1, names.length - 1)];
 };
 
@@ -641,25 +655,14 @@ const drawMonster = () => {
   if (monster.loaded && monster.image) {
     // Usar sprite
     c.drawImage(monster.image, -size / 2, -size / 2, size, size);
-  } else {
-    // Fallback: desenhar slime programaticamente
-    const bodyColor = monster.hitFlash > 0 ?
-      `rgb(${Math.min(255, 100 + 155 * monster.hitFlash)}, ${74 - 74 * monster.hitFlash}, ${120 - 70 * monster.hitFlash})` :
-      "#4a7c59";
 
-    c.fillStyle = bodyColor;
-    c.beginPath();
-    c.ellipse(0, 0, size * 0.8, size * 0.6, 0, 0, Math.PI * 2);
-    c.fill();
-
-    // Olhos
-    c.fillStyle = "#1a1a1a";
-    c.beginPath();
-    c.ellipse(-size * 0.25, -size * 0.1, size * 0.1, size * 0.15, 0, 0, Math.PI * 2);
-    c.fill();
-    c.beginPath();
-    c.ellipse(size * 0.25, -size * 0.1, size * 0.1, size * 0.15, 0, 0, Math.PI * 2);
-    c.fill();
+    // Efeito de hit flash (círculo vermelho translúcido)
+    if (monster.hitFlash > 0) {
+      c.fillStyle = `rgba(255, 50, 50, ${monster.hitFlash * 0.4})`;
+      c.beginPath();
+      c.ellipse(0, 0, size * 0.35, size * 0.25, 0, 0, Math.PI * 2);
+      c.fill();
+    }
   }
 
   // Draw HP bar above monster in monster-only mode (if HUD is enabled)

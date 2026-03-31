@@ -135,14 +135,15 @@ Todos os componentes estão funcionando:
 
 ---
 
-### 📋 Phase 12: Visual Improvements (TODO)
-- [ ] Remove blob fallback from monster sprite
+### 📋 Phase 12: Visual & Feature Improvements (TODO)
+- [x] Remove blob fallback from monster sprite
 - [ ] Generate new monster sprites (better quality)
 - [ ] Add more hero skins
 - [ ] Update monster HP values in `gameconfig.json`
 - [ ] Add death/spawn animations
 - [ ] Particle effects for critical hits
 - [ ] Multiple monster sprites per wave
+- [ ] Implement Global Rankings Panel
 
 ### ✅ Phase 13: Landing Page Polish & Demo Mode (2026-02-10)
 - [x] Custom logo image (`/imgs/logo.png`) replacing text title

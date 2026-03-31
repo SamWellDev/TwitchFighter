@@ -38,7 +38,7 @@
                 ]">
                     <div
                         class="aspect-square bg-gray-900 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="/sprites/hero_1.png" alt="Default" class="w-32 h-32 object-contain" />
+                        <img src="/sprites/Heroes/hero_1.png" alt="Default" class="w-32 h-32 object-contain" />
                     </div>
                     <h3 class="text-white font-semibold mb-1">Default</h3>
                     <p class="text-gray-400 text-sm mb-3">The classic soldier</p>
@@ -59,7 +59,7 @@
                 ]">
                     <div
                         class="aspect-square bg-gray-900 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="/sprites/brute.png" alt="Brute" class="w-32 h-32 object-contain" />
+                        <img src="/sprites/Heroes/brute.png" alt="Brute" class="w-32 h-32 object-contain" />
                     </div>
                     <h3 class="text-white font-semibold mb-1">Brute</h3>
                     <p class="text-gray-400 text-sm mb-3">Heavy armor warrior</p>
@@ -80,7 +80,7 @@
                 ]">
                     <div
                         class="aspect-square bg-gray-900 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="/sprites/green.png" alt="Green" class="w-32 h-32 object-contain" />
+                        <img src="/sprites/Heroes/green.png" alt="Green" class="w-32 h-32 object-contain" />
                     </div>
                     <h3 class="text-white font-semibold mb-1">Green</h3>
                     <p class="text-gray-400 text-sm mb-3">Toxic commando</p>
@@ -101,7 +101,7 @@
                 ]">
                     <div
                         class="aspect-square bg-gray-900 rounded-lg mb-4 flex items-center justify-center overflow-hidden">
-                        <img src="/sprites/slim.png" alt="Slim" class="w-32 h-32 object-contain" />
+                        <img src="/sprites/Heroes/slim.png" alt="Slim" class="w-32 h-32 object-contain" />
                     </div>
                     <h3 class="text-white font-semibold mb-1">Slim</h3>
                     <p class="text-gray-400 text-sm mb-3">Agile assassin</p>
@@ -146,9 +146,9 @@ const currentSkinName = computed(() => skinNames[selectedSkin.value] || 'Default
 
 const currentSkinPreview = computed(() => {
     if (selectedSkin.value === 'hero_1') {
-        return '/sprites/hero_1.png'
+        return '/sprites/Heroes/hero_1.png'
     }
-    return `/sprites/${selectedSkin.value}.png`
+    return `/sprites/Heroes/${selectedSkin.value}.png`
 })
 
 // Load skin from backend on mount

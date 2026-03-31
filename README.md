@@ -163,7 +163,6 @@ The overlay page has a transparent background, so only the hero, monster and eff
 - [x] Video Background with Toggle (Cinematic loop)
 - [x] Canvas battle system
 - [x] Dashboard with Config/Test tabs
-- [x] Global Rankings & Achievements
 - [x] C# Backend with PostgreSQL
 - [x] REST API (Auth, User, Progress, Stats, Rankings)
 - [x] SignalR Hub for real-time events
@@ -194,13 +193,14 @@ The overlay page has a transparent background, so only the hero, monster and eff
 | **Dashboard Test** | Sandbox with immortal Dummy monster |
 
 ### 📋 Next Steps (Visual Improvements)
-- [ ] Remove blob fallback and require actual sprites
+- [x] Remove blob fallback and require actual sprites
 - [ ] Generate new monster sprites (better quality)
 - [ ] Add more hero skins
 - [ ] Update monster HP values for balanced progression
 - [ ] Add death/spawn animations
 - [ ] Particle effects for critical hits
 - [ ] Sound effects integration
+- [ ] Implement Global Rankings Leaderboard
 
 ### 🎨 Art & Assets
 - [ ] Generate multiple monster sprites (Slime, Goblin, Orc, etc.)
